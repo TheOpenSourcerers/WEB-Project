@@ -2,7 +2,7 @@ import express from "express";
 import { PORT } from "./src/config.js";
 import { logger } from "./src/middleware/logger.js";
 import { errorHandler } from "./src/middleware/errorHandler.js";
-import { DbInit } from "./src/db/db.js";
+import { DbInit } from "./src/db/dbInit.js";
 
 // Database
 DbInit();

@@ -8,5 +8,3 @@ export const DbContext = new Sequelize({
         freezeTableName: true,
     },
 });
-
-export const DbInit = () => {};
