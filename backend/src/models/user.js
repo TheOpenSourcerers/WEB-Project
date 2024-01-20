@@ -10,6 +10,7 @@ export const user = DbContext.define("Users", {
     username: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
     },
     password: {
         type: Sequelize.STRING,
@@ -20,3 +21,11 @@ export const user = DbContext.define("Users", {
         allowNull: false,
     },
 });
+
+export const getUserByUsername = async (username) => {
+    return user.findOne({ where: { username } });
+};
+
+export const createUser = async (username, password, type) => {
+    return user.create({ username, password, type });
+};
