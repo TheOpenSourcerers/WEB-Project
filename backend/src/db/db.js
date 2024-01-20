@@ -6,5 +6,6 @@ export const DbContext = new Sequelize({
     logging: false,
     define: {
         freezeTableName: true,
+        timestamps: false,
     },
 });

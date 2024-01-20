@@ -1,4 +1,5 @@
-import { DbContext, DbInit } from "./db.js";
+import { DbContext } from "./db.js";
+import { DbInit } from "./dbInit.js";
 
 DbInit();
 
@@ -7,6 +8,6 @@ DbInit();
         await DbContext.sync({ force: true });
         console.log("Database restored.");
     } catch (error) {
-        console.error(error.stack);
+        console.error(error);
     }
 })();

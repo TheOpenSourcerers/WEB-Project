@@ -8,7 +8,7 @@ export const activity = DbContext.define("Activities", {
         autoIncrement: true,
     },
     // The author of the activity
-    userID: {
+    userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
