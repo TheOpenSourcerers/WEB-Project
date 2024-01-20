@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon index.js",
+        "debug": "nodemon --inspect index.js",
         "restore-db": "node ./src/db/restoreDb.js"
     },
     "type": "module",
