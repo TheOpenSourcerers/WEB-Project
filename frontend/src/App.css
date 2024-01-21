@@ -64,6 +64,11 @@ li:has(> .username) {
   padding: 20px;
   margin: 10px;
   color: #000;
+  cursor: pointer;
+}
+
+.activityCard:hover {
+  background-color: var(--color4);
 }
 
 .activityId {
@@ -95,4 +100,25 @@ li:has(> .username) {
   font-size: 14px;
   margin-top: 5px;
   font-weight: bold;
+}
+
+.activityForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 10px;
+  margin-bottom: 20px;
+  background-color: var(--color3);
+  padding: 10px 0 ;
+  color: black;
+  border-radius: 5px;
+}
+.activityForm label input {
+  margin-left: 10px;
+  width: 400px;
+}
+.activityForm label textarea {
+  margin-left: 10px;
+  width: 400px;
 }
