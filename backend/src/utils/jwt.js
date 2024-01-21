@@ -4,7 +4,7 @@ import { JWT_KEY } from "../config.js";
 export const generateToken = (user) => {
     return jwt.sign(
         {
-            userid: user.userid,
+            userid: user.id,
             type: user.type,
             username: user.username,
         },

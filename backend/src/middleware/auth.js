@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { JWT_KEY } from "../config/const.js";
+import { JWT_KEY } from "../config.js";
 
 export const authorize = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -23,7 +23,7 @@ export const authorize = (req, res, next) => {
 
 export const authorizeStudent = (req, res, next) => {
     authorize(req, res, () => {
-        if (req.decodedToken.type === "Student") {
+        if (req.decodedToken.type === "student") {
             next();
         } else {
             return res.status(403).json("Forbidden");
@@ -31,9 +31,9 @@ export const authorizeStudent = (req, res, next) => {
     });
 };
 
-export const authorizeProfessor = (req, res, next) => {
+export const authorizeTeacher = (req, res, next) => {
     authorize(req, res, () => {
-        if (req.decodedToken.type === "Professor") {
+        if (req.decodedToken.type === "teacher") {
             next();
         } else {
             return res.status(403).json("Forbidden");

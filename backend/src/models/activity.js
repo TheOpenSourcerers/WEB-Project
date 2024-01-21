@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import { Sequelize, where } from "sequelize";
 import { DbContext } from "../db/db.js";
 
 export const activity = DbContext.define("Activities", {
@@ -29,3 +29,17 @@ export const activity = DbContext.define("Activities", {
         allowNull: false,
     },
 });
+
+export const getActivityById = async (id) => {
+    return activity.findOne({ where: { id } });
+};
+
+export const getActivitiesByUserId = async (userId) => {
+    return activity.findAll({ where: { userId } });
+};
+
+export const createActivity = async (userId, date, duration, description) => {
+    const accessCode = (Math.random() + 1).toString(36).substring(7);
+
+    return activity.create({ userId, date, duration, description, accessCode });
+};
