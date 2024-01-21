@@ -14,10 +14,12 @@ function App() {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem("userData");
-        if (token) {
-            const decodedToken = JSON.parse(atob(token.split(".")[1]));
-            setUserData(decodedToken);
+        const localUserData = JSON.parse(localStorage.getItem("userData"));
+        if (localUserData) {
+            const decodedToken = JSON.parse(
+                atob(localUserData.token.split(".")[1])
+            );
+            setUserData(localUserData);
 
             if (decodedToken.exp) {
                 const expirationTime = decodedToken.exp * 1000 - Date.now();
@@ -77,7 +79,7 @@ function App() {
                 </ul>
             </div>
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home userData={userData} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
 
