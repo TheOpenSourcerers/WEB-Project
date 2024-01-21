@@ -122,3 +122,8 @@ li:has(> .username) {
   margin-left: 10px;
   width: 400px;
 }
+
+.activityForm div button {
+  margin: 5px;
+  padding: 10px;
+}

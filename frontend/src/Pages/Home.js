@@ -11,6 +11,11 @@ export const Home = (props) => {
         description: "",
     });
 
+    const [newFeedback, setNewFeedback] = useState({
+        activityId: "",
+        accessCode: "",
+    });
+
     useEffect(() => {
         if (userData?.type === "teacher") {
             fetch(API + "/getActivities", {
@@ -34,6 +39,14 @@ export const Home = (props) => {
         const { name, value } = event.target;
         setNewActivity((prevActivity) => ({
             ...prevActivity,
+            [name]: value,
+        }));
+    };
+
+    const handleFeedbackChange = (event) => {
+        const { name, value } = event.target;
+        setNewFeedback((prevFeedback) => ({
+            ...prevFeedback,
             [name]: value,
         }));
     };
@@ -82,6 +95,33 @@ export const Home = (props) => {
             });
     };
 
+    const reactToActivity = (e, type) => {
+        e.preventDefault();
+        const data = {
+            activityId: newFeedback.activityId,
+            accessCode: newFeedback.accessCode,
+            type,
+        };
+
+        fetch(API + "/createFeedback", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${userData.token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                // Process the fetched data here
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error("Error creating feedback:", error);
+                setSubmitError("Error creating feedback.");
+            });
+    };
+
     return (
         <div>
             <h1>
@@ -89,6 +129,60 @@ export const Home = (props) => {
                     ? "Your activities"
                     : "React to activity"}
             </h1>
+            {/* Give feedback here */}
+            {userData?.type === "student" && (
+                <>
+                    <form className="activityForm">
+                        <h2>Send feedback</h2>
+                        <label>
+                            Activity ID:
+                            <input
+                                type="number"
+                                name="activityId"
+                                value={newFeedback.activityId}
+                                onChange={handleFeedbackChange}
+                            />
+                        </label>
+                        <label>
+                            Access Code:
+                            <input
+                                type="text"
+                                name="accessCode"
+                                value={newFeedback.accessCode}
+                                onChange={handleFeedbackChange}
+                            />
+                        </label>
+
+                        {submitError ? (
+                            <label style={{ color: "red" }}>
+                                {submitError}
+                            </label>
+                        ) : null}
+                        <div>
+                            <button
+                                onClick={(e) => reactToActivity(e, "smiley")}
+                            >
+                                😊 Smiley
+                            </button>
+                            <button
+                                onClick={(e) => reactToActivity(e, "frowny")}
+                            >
+                                🙁 Frowny
+                            </button>
+                            <button
+                                onClick={(e) => reactToActivity(e, "surprised")}
+                            >
+                                😯 Surprised
+                            </button>
+                            <button
+                                onClick={(e) => reactToActivity(e, "confused")}
+                            >
+                                😕 Confused
+                            </button>
+                        </div>
+                    </form>
+                </>
+            )}
             {/* Render activities here */}
             {userData?.type === "teacher" && (
                 <>
