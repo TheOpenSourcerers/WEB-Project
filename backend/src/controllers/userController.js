@@ -16,7 +16,7 @@ userController.route("/login").post(async (req, res) => {
     if (!user) return res.status(403).json("Username or password is wrong.");
 
     // check the password using bcrypt
-    if (await bcrypt.compare(user.password, password))
+    if (!(await bcrypt.compare(password, user.password)))
         return res.status(403).json("Username or password is wrong.");
 
     // return the jwt token
