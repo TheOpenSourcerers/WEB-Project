@@ -38,7 +38,9 @@ feedbackController
 feedbackController
     .route("/getFeedback")
     .get(authorizeTeacher, async (req, res) => {
-        const { activityId } = req.body;
+        let { activityId } = req.body;
+
+        if (!activityId) activityId = req.query.activityId;
 
         if (!activityId) return res.status(400).json("Bad request");
 
