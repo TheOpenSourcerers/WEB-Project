@@ -1,17 +1,25 @@
-import { useEffect, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import "./App.css";
+import Activity from "./Pages/Activity";
 
 const logout = () => {
     localStorage.removeItem("userData");
     window.location.href = "/";
 };
 
+function useQuery() {
+    const { search } = useLocation();
+
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function App() {
     const [userData, setUserData] = useState(null);
+    const query = useQuery();
 
     useEffect(() => {
         const localUserData = JSON.parse(localStorage.getItem("userData"));
@@ -82,6 +90,12 @@ function App() {
                 <Route path="/" element={<Home userData={userData} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route
+                    path="/activity"
+                    element={
+                        <Activity id={query.get("id")} userData={userData} />
+                    }
+                />
 
                 <Route path="*" element={<h1>404 Not Found</h1>} />
             </Routes>
