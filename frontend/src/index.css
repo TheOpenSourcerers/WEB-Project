@@ -5,6 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
+  /* variables */
+  --color1: #2A292B;
+  --color2: #367C64;
+  --color3: #EAE694;
+  --color4: #EE843A;
+  --color5: #811B32;
+  
+  background-color: var(--color1);
+  color: white;
 }
 
 code {
