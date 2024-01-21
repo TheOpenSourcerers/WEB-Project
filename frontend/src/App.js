@@ -48,7 +48,9 @@ function App() {
                         <>
                             <li>
                                 <div className="username">
-                                    {userData.username}
+                                    {userData.type.charAt(0).toUpperCase() +
+                                        userData.type.slice(1)}
+                                    : {userData.username}
                                 </div>
                             </li>
                             <li>
