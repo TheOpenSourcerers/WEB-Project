@@ -13,6 +13,8 @@ activityController
     .get(authorize, async (req, res) => {
         const { activityId } = req.body;
 
+        if (!activityId) activityId = req.query.activityId;
+
         if (!activityId) return res.status(400).json("Bad request");
 
         const { accessCode, ...activity } =
