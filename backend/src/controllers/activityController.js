@@ -15,8 +15,10 @@ activityController
 
         if (!activityId) return res.status(400).json("Bad request");
 
-        const { accessCode, ...activity } = (await getActivityById(activityId))
-            .dataValues;
+        const { accessCode, ...activity } =
+            (await getActivityById(activityId))?.dataValues || {};
+
+        if (!accessCode) return res.status(404).json("Activity not found");
 
         if (
             req.decodedToken.type === "teacher" &&
