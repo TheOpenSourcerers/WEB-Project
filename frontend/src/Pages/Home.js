@@ -127,7 +127,9 @@ export const Home = (props) => {
             <h1>
                 {userData?.type === "teacher"
                     ? "Your activities"
-                    : "React to activity"}
+                    : userData?.type === "student"
+                    ? "React to activity"
+                    : "Continuous feedback application"}
             </h1>
             {/* Give feedback here */}
             {userData?.type === "student" && (
