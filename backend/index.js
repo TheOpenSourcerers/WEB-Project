@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { PORT } from "./src/config.js";
 import { logger } from "./src/middleware/logger.js";
 import { errorHandler } from "./src/middleware/errorHandler.js";
@@ -15,6 +16,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+    cors({
+        origin: "*",
+    })
+);
 
 app.use(logger);
 app.use(errorHandler);
