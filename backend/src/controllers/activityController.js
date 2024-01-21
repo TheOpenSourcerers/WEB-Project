@@ -15,7 +15,15 @@ activityController
 
         if (!activityId) return res.status(400).json("Bad request");
 
-        return res.status(200).json(await getActivityById(activityId));
+        const { accessCode, ...activity } = (await getActivityById(activityId))
+            .dataValues;
+
+        if (
+            req.decodedToken.type === "teacher" &&
+            activity.userId === req.decodedToken.userid
+        )
+            return res.status(200).json({ accessCode, ...activity });
+        else return res.status(200).json(activity);
     });
 
 activityController
