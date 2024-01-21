@@ -126,6 +126,7 @@ export const Home = (props) => {
                         </div>
                     ))}
                     <form className="activityForm">
+                        <h2>Create new activity</h2>
                         <label>
                             Date and Time:
                             <br />
