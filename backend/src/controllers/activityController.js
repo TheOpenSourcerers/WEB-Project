@@ -11,7 +11,7 @@ export const activityController = express.Router();
 activityController
     .route("/getActivityById")
     .get(authorize, async (req, res) => {
-        const { activityId } = req.body;
+        let { activityId } = req.body;
 
         if (!activityId) activityId = req.query.activityId;
 
